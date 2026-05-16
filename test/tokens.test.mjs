@@ -30,8 +30,21 @@ test("tokens.css declares every required --ds-* token", () => {
   }
 });
 
-test("tokens.css ships base element resets and focus ring", () => {
+test("tokens.css ships the focus ring", () => {
   assert.ok(/:focus-visible/.test(css), "missing :focus-visible rule");
-  assert.ok(/\bbody\s*{/.test(css), "missing body reset");
-  assert.ok(/h1\s*,\s*h2/.test(css), "missing heading resets");
+});
+
+test("tokens.css is pure tokens — NO opinionated element resets", () => {
+  // Element resets are project-opinionated (link decoration, code boxing,
+  // heading sizing) and conflict across consumers. They must live in the
+  // opt-in reset.css, never unlayered in tokens.css. See the
+  // 2026-05-16 design-system-package spec addendum.
+  assert.ok(!/\bbody\s*\{/.test(css), "tokens.css must not reset body");
+  assert.ok(!/(^|\})\s*a\s*\{/.test(css), "tokens.css must not style a");
+  assert.ok(!/\bcode\s*[,{]/.test(css), "tokens.css must not style code");
+  assert.ok(
+    !/h1\s*,\s*h2/.test(css),
+    "tokens.css must not carry heading element resets"
+  );
+  assert.ok(!/::selection/.test(css), "tokens.css must not style ::selection");
 });

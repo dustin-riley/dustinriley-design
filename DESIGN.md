@@ -24,8 +24,9 @@ This doc is the source of truth; the bundled `dustinriley-design` skill mirrors 
 
 | Concern | File |
 |---|---|
-| Design tokens (color, type, spacing, radius, shadow, motion) | `@dustin-riley/design/tokens.css` |
+| Design tokens (color, type, spacing, radius, shadow, motion) + focus ring — pure tokens, no element styling | `@dustin-riley/design/tokens.css` |
 | Component / primitive styles (buttons, container, panel, typographic helpers, etc.) | `@dustin-riley/design/core.css` |
+| Opt-in base element resets (link underline, boxed code, heading sizes, body) — import only if you have no base layer, and into a layer weaker than components | `@dustin-riley/design/reset.css` |
 | Tailwind v4 base + theme bridge + shadcn bridge | `@dustin-riley/design/tailwind.css` |
 
 **All design tokens are CSS custom properties prefixed `--ds-*`.** Always reference the token, never hard-code a hex / px value. If you need something the token set doesn't cover, that's a signal to push back on the design, not invent a one-off value.
