@@ -292,3 +292,27 @@ etc.). Enforced by a test asserting core.css contains no `:where(a)`/bare `a`
 rule. Consumer note: a truly bare `<a>` (outside nav/prose/component context)
 now inherits text color instead of `--ds-link` — intended; give such links a
 component/utility class to opt into link color.
+
+---
+
+## Addendum 6 2026-05-16 — focus ring: tight outline, not box-shadow halo
+
+The shipped `:focus-visible` used `box-shadow: 0 0 0 2px var(--ds-bg), 0 0 0
+4px rgba(184,84,28,.4)` **and** force-set `border-radius: var(--ds-radius-sm)`.
+On wide inputs (e.g. scorigami's combobox search) this rendered as an
+oversized soft double-halo, and the forced radius squared off/reshaped
+focused elements (pills, differently-rounded inputs) — neither matched
+DESIGN.md's stated spec ("2px primary at 40% opacity, 2px offset").
+
+**Fix:** deliver the ring as an `outline`:
+
+    --ds-focus-ring-color: rgba(184, 84, 28, 0.4);
+    :focus-visible { outline: 2px solid var(--ds-focus-ring-color);
+                     outline-offset: 2px; }
+
+`outline` stays crisp (no spread/halo), follows each element's own
+border-radius automatically, and never reshapes the element. This is the
+approach scorigami originally used and deliberately chose for exactly this
+reason; it is now the system default. `--ds-focus-ring` (box-shadow value)
+is renamed `--ds-focus-ring-color`; no consumer referenced the old token.
+Shipped 0.2.2.
