@@ -17,32 +17,26 @@ npm i @dustin-riley/design
 @import "@dustin-riley/design/tokens.css";
 @import "@dustin-riley/design/core.css";
 
-/* base element styling (links, code, headings, body) — plain import,
-   zero specificity (:where), so any app rule always wins. No @layer,
-   nothing to remember: */
-@import "@dustin-riley/design/reset.css";
-
 /* Tailwind v4 + shadcn projects also need: */
 @import "@dustin-riley/design/tailwind.css"; /* pulls in core + tokens */
 ```
 
-Every app imports the same set — no per-app reasoning.
+That's the whole contract. No separate reset, no `@layer`, nothing per-app.
 
 ## What's in / out
 
 `tokens.css` — `--ds-*` custom properties + the focus ring. Pure tokens, no
-element styling; safe to import anywhere/unlayered.
+element styling.
 
 `core.css` — generic primitives (`.ds-btn*`, `.ds-container`, `.ds-panel`,
-typographic helpers, `.kbd`, …). Imports `tokens.css`.
+typographic helpers, `.kbd`, …) **plus minimal base element styling** (body
+defaults, heading font/size, mono code, `::selection`). Imports `tokens.css`.
+Base rules are wrapped in `:where()` (zero specificity) so any app/component/
+Preflight rule wins.
 
-`reset.css` — base element styling (link underline, boxed inline code, heading
-sizes, body defaults). These are *not* tokens. Every selector is wrapped in
-`:where()`, giving it **zero specificity**, so *any* app rule — a bare `a {}`,
-a component class, a prose/typography plugin — wins automatically. No `@layer`
-(bundlers like Lightning CSS flatten a package-internal `@layer` pulled in via
-`@import`); no consumer incantation. Plain `@import`, same in every app. It only
-sets the baseline where nothing else applies. Requires tokens to be loaded.
+**Links are not underlined by default.** Per `DESIGN.md`, links are color-only;
+the system never sets a global link `text-decoration`. Underline is an
+intentional, component-scoped decision (e.g. article body) made by the app.
 
 `tailwind.css` — optional Tailwind v4 `@theme` + shadcn HSL bridge (pulls in
 core + tokens). Does **not** include `reset.css`.

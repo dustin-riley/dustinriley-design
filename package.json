@@ -1,13 +1,12 @@
 {
   "name": "@dustin-riley/design",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Dustin Riley design system — warm mid-century modern tokens and primitives.",
   "license": "MIT",
   "type": "module",
   "files": ["src", "DESIGN.md", "skill", "README.md"],
   "exports": {
     "./tokens.css": "./src/tokens.css",
-    "./reset.css": "./src/reset.css",
     "./core.css": "./src/core.css",
     "./tailwind.css": "./src/tailwind.css",
     "./DESIGN.md": "./DESIGN.md"

@@ -229,3 +229,73 @@ h6,
   border-radius: var(--ds-radius-sm);
   color: var(--ds-text);
 }
+
+/* ============================================================
+   Base element styling
+
+   Minimal, opinionated defaults for raw elements. Wrapped in
+   :where() (zero specificity) so any app/component/Preflight
+   rule wins. Ships in core.css (no separate import, no @layer):
+   apps consume core.css already.
+
+   NOTE: no global link `text-decoration`. Per DESIGN.md links
+   are color-only; underline is an intentional, component-scoped
+   decision (e.g. article body), never a system-wide default.
+   Letting Tailwind Preflight's `a{text-decoration:inherit}`
+   stand keeps links un-underlined unless a component opts in.
+   ============================================================ */
+
+:where(html) { font-size: 16px; }
+
+:where(body) {
+  background: var(--ds-bg);
+  color: var(--ds-text);
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-fs-body);
+  line-height: var(--ds-lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--ds-font-display);
+  color: var(--ds-text);
+  font-weight: 600;
+}
+
+:where(h1, .h1) {
+  font-size: var(--ds-fs-h1);
+  line-height: var(--ds-lh-h1);
+  letter-spacing: var(--ds-tracking-h1);
+}
+:where(h2, .h2) {
+  font-size: var(--ds-fs-h2);
+  line-height: var(--ds-lh-h2);
+  letter-spacing: var(--ds-tracking-h2);
+}
+:where(h3, .h3) {
+  font-size: var(--ds-fs-h3);
+  line-height: var(--ds-lh-h3);
+  letter-spacing: var(--ds-tracking-h3);
+  font-weight: 500;
+}
+
+:where(a) {
+  color: var(--ds-link);
+  transition: color var(--ds-duration-fast) var(--ds-ease-standard);
+}
+
+:where(code, pre, kbd, samp) {
+  font-family: var(--ds-font-mono);
+  font-size: 0.9em;
+}
+
+:where(code) {
+  background: var(--ds-surface-sunken);
+  padding: 2px 6px;
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-border);
+}
+
+::selection { background: rgba(184, 84, 28, 0.2); }
