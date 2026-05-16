@@ -18,10 +18,11 @@ Apply this whenever you add or change UI in a project importing `@dustin-riley/d
 ## How to consume
 - Always: `@import "@dustin-riley/design/tokens.css"; @import "@dustin-riley/design/core.css";`
 - Tailwind v4 + shadcn projects additionally: `@import "@dustin-riley/design/tailwind.css";`
-- Base element styling: `@import "@dustin-riley/design/reset.css";` — same in
-  every app. `tokens.css` is pure tokens (no element styling). `reset.css` is
-  internally `@layer base`, so component/prose/app rules always win over it;
-  there is no `@layer` wrapper to remember and no per-app judgment.
+- Base element styling: `@import "@dustin-riley/design/reset.css";` — plain
+  import, same in every app. `tokens.css` is pure tokens (no element styling).
+  `reset.css` selectors are all `:where()` (zero specificity), so any app rule
+  (component class, bare element, prose plugin) wins automatically — no
+  `@layer`, no per-app judgment. Requires tokens to be loaded.
 
 ## Vocabulary (prefer extending these over inventing parallels)
 Buttons `.ds-btn` + `.ds-btn-primary|secondary|ghost`; layout `.ds-container`,

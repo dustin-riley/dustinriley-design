@@ -17,9 +17,9 @@ npm i @dustin-riley/design
 @import "@dustin-riley/design/tokens.css";
 @import "@dustin-riley/design/core.css";
 
-/* base element styling (links, code, headings, body) — uniform,
-   safe for every app; it's internally @layer base so your
-   components/prose always win: */
+/* base element styling (links, code, headings, body) — plain import,
+   zero specificity (:where), so any app rule always wins. No @layer,
+   nothing to remember: */
 @import "@dustin-riley/design/reset.css";
 
 /* Tailwind v4 + shadcn projects also need: */
@@ -37,11 +37,12 @@ element styling; safe to import anywhere/unlayered.
 typographic helpers, `.kbd`, …). Imports `tokens.css`.
 
 `reset.css` — base element styling (link underline, boxed inline code, heading
-sizes, body defaults). These are *not* tokens, but they're shipped wrapped in
-`@layer base` so they are **cascade-safe to import the same way in every app**:
-your `@layer components`/`utilities`, a prose/typography plugin, and unlayered
-app CSS all win over it automatically. It only sets the baseline where nothing
-else applies. No per-app judgment, no `@layer` wrapper to remember.
+sizes, body defaults). These are *not* tokens. Every selector is wrapped in
+`:where()`, giving it **zero specificity**, so *any* app rule — a bare `a {}`,
+a component class, a prose/typography plugin — wins automatically. No `@layer`
+(bundlers like Lightning CSS flatten a package-internal `@layer` pulled in via
+`@import`); no consumer incantation. Plain `@import`, same in every app. It only
+sets the baseline where nothing else applies. Requires tokens to be loaded.
 
 `tailwind.css` — optional Tailwind v4 `@theme` + shadcn HSL bridge (pulls in
 core + tokens). Does **not** include `reset.css`.

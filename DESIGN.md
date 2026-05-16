@@ -26,7 +26,7 @@ This doc is the source of truth; the bundled `dustinriley-design` skill mirrors 
 |---|---|
 | Design tokens (color, type, spacing, radius, shadow, motion) + focus ring — pure tokens, no element styling | `@dustin-riley/design/tokens.css` |
 | Component / primitive styles (buttons, container, panel, typographic helpers, etc.) | `@dustin-riley/design/core.css` |
-| Base element resets (link underline, boxed code, heading sizes, body) — internally `@layer base`, imported uniformly by every app; components/prose always win over it | `@dustin-riley/design/reset.css` |
+| Base element resets (link underline, boxed code, heading sizes, body) — `:where()` zero-specificity, plain import in every app; any app rule wins automatically | `@dustin-riley/design/reset.css` |
 | Tailwind v4 base + theme bridge + shadcn bridge | `@dustin-riley/design/tailwind.css` |
 
 **All design tokens are CSS custom properties prefixed `--ds-*`.** Always reference the token, never hard-code a hex / px value. If you need something the token set doesn't cover, that's a signal to push back on the design, not invent a one-off value.

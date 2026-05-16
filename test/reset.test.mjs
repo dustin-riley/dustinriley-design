@@ -8,44 +8,59 @@ const css = readFileSync(
   "utf8"
 );
 
-// reset.css is the OPT-IN base element layer. Consumers that have no base
-// styles of their own (e.g. scorigami) import it; consumers that already
-// own their element styling (e.g. dustinriley.com's design-system.css)
-// do NOT. It must be self-contained (pull in tokens) and carry the
-// element resets that previously (wrongly) lived in tokens.css.
+// reset.css ships opinionated base element styling at ZERO specificity
+// (every selector wrapped in :where()), so any app rule wins with no
+// cascade-layer plumbing. It must NOT use @layer (bundlers flatten a
+// package-internal @layer on @import) and must NOT @import tokens
+// (consumers load tokens.css/core.css/tailwind.css themselves).
 
-test("reset.css pulls in tokens so it is self-contained", () => {
+const cssNoComments = css.replace(/\/\*[\s\S]*?\*\//g, "");
+
+test("reset.css uses NO @layer (would be flattened on @import)", () => {
   assert.ok(
-    /@import\s+["']\.\/tokens\.css["']/.test(css),
-    "reset.css must @import ./tokens.css"
+    !/@layer/.test(cssNoComments),
+    "reset.css must not declare @layer"
   );
 });
 
-test("reset.css wraps its element resets in @layer base (cascade-safe)", () => {
-  // Must be layered so consumer @layer components / prose always win and
-  // it can never override component styling — uniform, footgun-free.
-  assert.ok(/@layer\s+base\s*\{/.test(css), "reset.css must use @layer base");
-  // The element rules must be INSIDE the layer block, not before it.
-  const layerIdx = css.search(/@layer\s+base\s*\{/);
-  const bodyIdx = css.search(/\bbody\s*\{/);
+test("reset.css does NOT @import tokens (consumer loads tokens)", () => {
   assert.ok(
-    layerIdx !== -1 && bodyIdx > layerIdx,
-    "element resets must be inside the @layer base block"
+    !/@import/.test(cssNoComments),
+    "reset.css must be self-contained plain rules — no @import"
   );
 });
 
-test("reset.css carries the base element resets", () => {
-  assert.ok(/\bbody\s*\{/.test(css), "missing body reset");
-  assert.ok(/(^|\})\s*a\s*\{/.test(css), "missing a reset");
+test("every element rule is wrapped in :where() for zero specificity", () => {
+  // No bare element/class selector blocks — they must be :where(...).
+  // Strip comments first.
+  const noComments = css.replace(/\/\*[\s\S]*?\*\//g, "");
+  const bareElement =
+    /(^|\})\s*(html|body|h[1-6]|a|code|pre|kbd|samp)\s*[,{]/m;
+  assert.ok(
+    !bareElement.test(noComments),
+    "found a bare (non-:where) element selector — must be :where()"
+  );
+  assert.ok(/:where\(\s*a\s*\)/.test(css), "a must be :where(a)");
+  assert.ok(/:where\(\s*body\s*\)/.test(css), "body must be :where(body)");
+  assert.ok(
+    /:where\(\s*h1\s*,\s*h2/.test(css),
+    "headings must be :where(h1, h2, …)"
+  );
+});
+
+test("reset.css carries the base element declarations", () => {
   assert.ok(/text-decoration:\s*underline/.test(css), "missing link underline");
-  assert.ok(/\bcode\s*\{/.test(css), "missing code reset");
-  assert.ok(/h1\s*,\s*h2/.test(css), "missing heading resets");
-  assert.ok(/::selection/.test(css), "missing ::selection");
+  assert.ok(/background:\s*var\(--ds-bg\)/.test(css), "missing body bg");
+  assert.ok(
+    /:where\(code\)[^}]*border:\s*1px solid var\(--ds-border\)/.test(css),
+    "missing boxed inline code"
+  );
+  assert.ok(/::selection\s*\{/.test(css), "missing ::selection");
 });
 
-test("reset.css does NOT redeclare design tokens (those live in tokens.css)", () => {
+test("reset.css does NOT redeclare design tokens", () => {
   assert.ok(
-    !/:root\s*\{[^}]*--ds-bg\s*:/.test(css),
-    "reset.css must not redeclare --ds-* tokens; it imports tokens.css"
+    !/:root\s*\{[^}]*--ds-/.test(css),
+    "reset.css must not declare --ds-* tokens; those live in tokens.css"
   );
 });
