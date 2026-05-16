@@ -281,10 +281,11 @@ h6,
   font-weight: 500;
 }
 
-:where(a) {
-  color: var(--ds-link);
-  transition: color var(--ds-duration-fast) var(--ds-ease-standard);
-}
+/* No global `a` rule. <a> is both chrome (nav/brand/footer) and content,
+   so any system-wide color/decoration is wrong somewhere. Links inherit
+   text color via Tailwind Preflight; link color/underline is an
+   intentional component or prose decision (article-body links, prose
+   links, active nav, etc. opt into var(--ds-link)). */
 
 :where(code, pre, kbd, samp) {
   font-family: var(--ds-font-mono);
