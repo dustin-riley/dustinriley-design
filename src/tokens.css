@@ -102,17 +102,18 @@
   --ds-duration-slow: 280ms;
   --ds-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  /* Focus ring — 2px primary @ 40% opacity, 2px offset (per DESIGN.md).
+  /* Focus ring — 2px primary @ 40% opacity, edge-hugging (no offset).
      Delivered as an `outline` so it stays tight (no soft halo on wide
      inputs) and follows each element's own border-radius. Do NOT switch
-     to box-shadow or force a border-radius here — that produced an
-     oversized glow + squared-off corners (see docs/SPEC.md addendum 6). */
+     to box-shadow, force a border-radius, or add an outline-offset —
+     all of those read as an oversized glow (see docs/SPEC.md addenda
+     6 & 7). */
   --ds-focus-ring-color: rgba(184, 84, 28, 0.4);
 }
 
 :focus-visible {
   outline: 2px solid var(--ds-focus-ring-color);
-  outline-offset: 2px;
+  outline-offset: 0;
 }
 
 /* Opinionated base element resets (link underline, code boxing,

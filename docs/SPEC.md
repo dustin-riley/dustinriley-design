@@ -316,3 +316,13 @@ approach scorigami originally used and deliberately chose for exactly this
 reason; it is now the system default. `--ds-focus-ring` (box-shadow value)
 is renamed `--ds-focus-ring-color`; no consumer referenced the old token.
 Shipped 0.2.2.
+
+---
+
+## Addendum 7 2026-05-16 — focus ring is edge-hugging (outline-offset: 0)
+
+`outline-offset: 2px` (addendum 6, matching the original DESIGN.md "2px
+offset") still read as too prominent on large inputs — the detached ring
+looks like a glow. Set `outline-offset: 0` so the 2px outline hugs the
+element edge (scorigami's original intent). DESIGN.md updated to "edge-
+hugging / no offset". Shipped 0.2.3.

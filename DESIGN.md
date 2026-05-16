@@ -148,7 +148,7 @@ For framework motion (Framer Motion etc.), use spring presets:
 | Hover (cards, buttons) | `translateY(-1px)` + elevation bump `sm → md`. Color shift secondary. |
 | Hover (text links) | Color shift only — no underline toggling. |
 | Press / active | `scale(0.97)` snappy spring. Buttons may shift to `--ds-primary-pressed`. Elevation drops to resting. |
-| Focus | `--ds-focus-ring-color` outline (2px primary at 40% opacity, 2px offset; outline follows the element shape). Always visible. **Never `outline: none` without a replacement** — wire `:focus-visible` to the ring globally. |
+| Focus | `--ds-focus-ring-color` outline (2px primary at 40% opacity, edge-hugging / no offset; follows the element shape). Always visible. **Never `outline: none` without a replacement** — wire `:focus-visible` to the ring globally. |
 | Disabled | 40% opacity, no pointer events, no hover lift. Never communicated by color alone. |
 
 ---
