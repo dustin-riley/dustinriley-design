@@ -35,7 +35,7 @@ export function hexToHslTriplet(hex) {
 }
 
 // shadcn var -> source --ds-* token
-const MAP = {
+export const MAP = {
   "--background": "--ds-bg",
   "--foreground": "--ds-text",
   "--card": "--ds-bg",

@@ -2,21 +2,11 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { hexToHslTriplet, extractDsHex } from "../scripts/generate-bridge.mjs";
+import { hexToHslTriplet, extractDsHex, MAP } from "../scripts/generate-bridge.mjs";
 
 const url = (p) => fileURLToPath(new URL(p, import.meta.url));
 const tokens = readFileSync(url("../src/tokens.css"), "utf8");
 const bridge = readFileSync(url("../src/tailwind.css"), "utf8");
-
-const MAP = {
-  "--background": "--ds-bg",
-  "--foreground": "--ds-text",
-  "--primary": "--ds-primary",
-  "--primary-foreground": "--ds-on-primary",
-  "--border": "--ds-border",
-  "--ring": "--ds-primary",
-  "--destructive": "--ds-error"
-};
 
 test("hexToHslTriplet converts known values", () => {
   assert.equal(hexToHslTriplet("#ffffff"), "0 0% 100%");
