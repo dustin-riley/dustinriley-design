@@ -21,6 +21,19 @@ test("reset.css pulls in tokens so it is self-contained", () => {
   );
 });
 
+test("reset.css wraps its element resets in @layer base (cascade-safe)", () => {
+  // Must be layered so consumer @layer components / prose always win and
+  // it can never override component styling — uniform, footgun-free.
+  assert.ok(/@layer\s+base\s*\{/.test(css), "reset.css must use @layer base");
+  // The element rules must be INSIDE the layer block, not before it.
+  const layerIdx = css.search(/@layer\s+base\s*\{/);
+  const bodyIdx = css.search(/\bbody\s*\{/);
+  assert.ok(
+    layerIdx !== -1 && bodyIdx > layerIdx,
+    "element resets must be inside the @layer base block"
+  );
+});
+
 test("reset.css carries the base element resets", () => {
   assert.ok(/\bbody\s*\{/.test(css), "missing body reset");
   assert.ok(/(^|\})\s*a\s*\{/.test(css), "missing a reset");

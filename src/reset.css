@@ -1,79 +1,84 @@
 @import "./tokens.css";
 
 /* ============================================================
-   @dustin-riley/design — base element resets (OPT-IN)
+   @dustin-riley/design — base element resets
 
    Opinionated base styling for raw elements (link underline,
-   boxed inline code, heading sizes, body defaults). These are
-   NOT tokens — they are project-level base opinions, so they
-   ship separately and are opt-in.
+   boxed inline code, heading sizes, body defaults).
 
-   - Import this ONLY if your project has no base element layer
-     of its own.
-   - Import it into a cascade layer WEAKER than your component
-     styles so specific rules (e.g. `.site-nav a {…}`) win, e.g.:
-         @layer base { @import "@dustin-riley/design/reset.css"; }
-     Importing it unlayered makes it beat every layered rule and
-     will override your component overrides — don't.
-   - Projects that already style their own base elements (raw
-     `a` / `code` / headings) must NOT import this.
+   These rules are wrapped in `@layer base` (the same base layer
+   Tailwind v4 defines), so they CANNOT override your component
+   styles — anything in `@layer components`/`utilities`, a prose/
+   typography plugin, or unlayered app CSS wins automatically.
+   They only provide the baseline where nothing else applies.
+
+   Uniform contract — every consuming app imports this the same
+   way, no per-app reasoning, no `@layer` wrapper to remember:
+
+       @import "@dustin-riley/design/reset.css";
+
+   An app that wants different base type (e.g. responsive heading
+   sizes) just keeps its own `@layer base`/component rules ordered
+   after this import; same specificity, later wins.
    ============================================================ */
 
-html { font-size: 16px; }
+@layer base {
+  html { font-size: 16px; }
 
-body {
-  background: var(--ds-bg);
-  color: var(--ds-text);
-  font-family: var(--ds-font-body);
-  font-size: var(--ds-fs-body);
-  line-height: var(--ds-lh-body);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  overflow-x: clip;
-}
+  body {
+    background: var(--ds-bg);
+    color: var(--ds-text);
+    font-family: var(--ds-font-body);
+    font-size: var(--ds-fs-body);
+    line-height: var(--ds-lh-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--ds-font-display);
-  color: var(--ds-text);
-  font-weight: 600;
-}
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--ds-font-display);
+    color: var(--ds-text);
+    font-weight: 600;
+  }
 
-h1, .h1 {
-  font-size: var(--ds-fs-h1);
-  line-height: var(--ds-lh-h1);
-  letter-spacing: var(--ds-tracking-h1);
-}
-h2, .h2 {
-  font-size: var(--ds-fs-h2);
-  line-height: var(--ds-lh-h2);
-  letter-spacing: var(--ds-tracking-h2);
-}
-h3, .h3 {
-  font-size: var(--ds-fs-h3);
-  line-height: var(--ds-lh-h3);
-  letter-spacing: var(--ds-tracking-h3);
-  font-weight: 500;
-}
+  h1, .h1 {
+    font-size: var(--ds-fs-h1);
+    line-height: var(--ds-lh-h1);
+    letter-spacing: var(--ds-tracking-h1);
+  }
+  h2, .h2 {
+    font-size: var(--ds-fs-h2);
+    line-height: var(--ds-lh-h2);
+    letter-spacing: var(--ds-tracking-h2);
+  }
+  h3, .h3 {
+    font-size: var(--ds-fs-h3);
+    line-height: var(--ds-lh-h3);
+    letter-spacing: var(--ds-tracking-h3);
+    font-weight: 500;
+  }
 
-a {
-  color: var(--ds-link);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  transition: color var(--ds-duration-fast) var(--ds-ease-standard);
-}
-a:hover { color: var(--ds-link-hover); }
+  a {
+    color: var(--ds-link);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color var(--ds-duration-fast) var(--ds-ease-standard);
+  }
+  a:hover { color: var(--ds-link-hover); }
 
-code, pre, kbd, samp {
-  font-family: var(--ds-font-mono);
-  font-size: 0.9em;
-}
+  code, pre, kbd, samp {
+    font-family: var(--ds-font-mono);
+    font-size: 0.9em;
+  }
 
-code {
-  background: var(--ds-surface-sunken);
-  padding: 2px 6px;
-  border-radius: var(--ds-radius-sm);
-  border: 1px solid var(--ds-border);
-}
+  code {
+    background: var(--ds-surface-sunken);
+    padding: 2px 6px;
+    border-radius: var(--ds-radius-sm);
+    border: 1px solid var(--ds-border);
+  }
 
-::selection { background: rgba(184, 84, 28, 0.2); }
+  ::selection { background: rgba(184, 84, 28, 0.2); }
+}

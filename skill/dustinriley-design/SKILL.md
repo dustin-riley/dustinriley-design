@@ -18,11 +18,10 @@ Apply this whenever you add or change UI in a project importing `@dustin-riley/d
 ## How to consume
 - Always: `@import "@dustin-riley/design/tokens.css"; @import "@dustin-riley/design/core.css";`
 - Tailwind v4 + shadcn projects additionally: `@import "@dustin-riley/design/tailwind.css";`
-- `tokens.css` is pure tokens — safe unlayered. Opinionated base element
-  resets are NOT in tokens.css; they live in opt-in `@dustin-riley/design/reset.css`.
-  Import `reset.css` only if the project has no base element styling of its
-  own, and inside a layer weaker than components: `@layer base { @import "@dustin-riley/design/reset.css"; }`.
-  Never import reset.css unlayered — it will override component rules.
+- Base element styling: `@import "@dustin-riley/design/reset.css";` — same in
+  every app. `tokens.css` is pure tokens (no element styling). `reset.css` is
+  internally `@layer base`, so component/prose/app rules always win over it;
+  there is no `@layer` wrapper to remember and no per-app judgment.
 
 ## Vocabulary (prefer extending these over inventing parallels)
 Buttons `.ds-btn` + `.ds-btn-primary|secondary|ghost`; layout `.ds-container`,

@@ -17,14 +17,16 @@ npm i @dustin-riley/design
 @import "@dustin-riley/design/tokens.css";
 @import "@dustin-riley/design/core.css";
 
-/* Tailwind v4 + shadcn projects instead just need: */
-@import "@dustin-riley/design/tailwind.css"; /* pulls in core + tokens */
+/* base element styling (links, code, headings, body) — uniform,
+   safe for every app; it's internally @layer base so your
+   components/prose always win: */
+@import "@dustin-riley/design/reset.css";
 
-/* ONLY if your project has no base element styling of its own —
-   import it into a layer weaker than your components so specific
-   rules still win: */
-@layer base { @import "@dustin-riley/design/reset.css"; }
+/* Tailwind v4 + shadcn projects also need: */
+@import "@dustin-riley/design/tailwind.css"; /* pulls in core + tokens */
 ```
+
+Every app imports the same set — no per-app reasoning.
 
 ## What's in / out
 
@@ -34,13 +36,12 @@ element styling; safe to import anywhere/unlayered.
 `core.css` — generic primitives (`.ds-btn*`, `.ds-container`, `.ds-panel`,
 typographic helpers, `.kbd`, …). Imports `tokens.css`.
 
-`reset.css` — **opt-in** opinionated base element resets (link underline, boxed
-inline code, heading sizes, body defaults). These are *not* tokens — they are
-project-level base opinions. Import only if you have no base layer of your own,
-and import it **into a cascade layer weaker than your components**; importing it
-unlayered makes it override your component rules. Projects that already style
-their own raw `a`/`code`/headings (e.g. via a prose/typography plugin) must NOT
-import it.
+`reset.css` — base element styling (link underline, boxed inline code, heading
+sizes, body defaults). These are *not* tokens, but they're shipped wrapped in
+`@layer base` so they are **cascade-safe to import the same way in every app**:
+your `@layer components`/`utilities`, a prose/typography plugin, and unlayered
+app CSS all win over it automatically. It only sets the baseline where nothing
+else applies. No per-app judgment, no `@layer` wrapper to remember.
 
 `tailwind.css` — optional Tailwind v4 `@theme` + shadcn HSL bridge (pulls in
 core + tokens). Does **not** include `reset.css`.
