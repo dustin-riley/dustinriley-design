@@ -18,9 +18,11 @@ A framework-neutral CSS design system published to public npm as
 
 Real consumers to keep working: **dustinriley.com** (Astro) and **scorigami**
 (Next + Tailwind v4 + shadcn). The full design rationale and the complete
-root-cause history of past mistakes live in
-`dustinriley.com/docs/superpowers/{specs,plans}/2026-05-16-design-system-package*`
-(spec has 5 addenda — read them before changing cascade/layout behavior).
+root-cause history of past mistakes are self-contained here:
+- `docs/SPEC.md` — design + architecture, with 5 addenda documenting the
+  cascade/`@layer`/`:where`/no-global-`a` journey. **Read the addenda before
+  changing any cascade or base-element behavior.**
+- `docs/IMPLEMENTATION-PLAN.md` — original task-by-task extraction record.
 
 ## Layout
 
