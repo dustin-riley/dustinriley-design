@@ -1,0 +1,231 @@
+@import "./tokens.css";
+
+/* ============================================================
+   @dustinriley/design — core primitives
+   Curated, reusable component classes copied verbatim from the
+   canonical dustinriley.com design-system.css and scorigami
+   globals.css. Site furniture (nav, footer, hero, content
+   grids, article, chart bits) is intentionally excluded.
+   ============================================================ */
+
+/* ----- Type helpers ----- */
+h1,
+.h1 {
+  font-size: var(--ds-fs-h1);
+  line-height: var(--ds-lh-h1);
+  letter-spacing: var(--ds-tracking-h1);
+}
+
+h2,
+.h2 {
+  font-size: var(--ds-fs-h2);
+  line-height: var(--ds-lh-h2);
+  letter-spacing: var(--ds-tracking-h2);
+}
+
+h3,
+.h3 {
+  font-size: var(--ds-fs-h3);
+  line-height: var(--ds-lh-h3);
+  letter-spacing: var(--ds-tracking-h3);
+  font-weight: 500;
+}
+
+h4,
+.h4 {
+  font-size: var(--ds-fs-h4);
+  line-height: var(--ds-lh-h4);
+}
+
+h5,
+.h5 {
+  font-size: var(--ds-fs-h5);
+  line-height: var(--ds-lh-h5);
+}
+
+h6,
+.h6 {
+  font-size: var(--ds-fs-h6);
+  line-height: var(--ds-lh-h6);
+}
+
+.ds-display {
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-fs-display);
+  line-height: var(--ds-lh-display);
+  letter-spacing: var(--ds-tracking-display);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .ds-display {
+    font-size: 2.25rem;
+  }
+}
+
+.ds-lede {
+  font-size: var(--ds-fs-body-lg);
+  line-height: var(--ds-lh-body-lg);
+  color: var(--ds-text-muted);
+}
+
+.ds-caption {
+  font-size: var(--ds-fs-caption);
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--ds-text-muted);
+}
+
+/* ----- Layout ----- */
+.ds-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--ds-space-5);
+}
+
+.ds-section {
+  padding-top: var(--ds-space-7);
+  padding-bottom: var(--ds-space-7);
+}
+
+/* ----- Buttons ----- */
+.ds-btn {
+  font-family: var(--ds-font-body);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: var(--ds-radius-pill);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition:
+    transform var(--ds-duration-fast) var(--ds-ease-standard),
+    box-shadow var(--ds-duration-base) var(--ds-ease-standard),
+    background var(--ds-duration-fast) var(--ds-ease-standard);
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.ds-btn-primary {
+  background: var(--ds-primary);
+  color: var(--ds-on-primary);
+  box-shadow: var(--ds-shadow-sm);
+}
+
+.ds-btn-primary:hover {
+  background: var(--ds-primary-hover);
+  color: var(--ds-on-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--ds-shadow-md);
+}
+
+.ds-btn-primary:active {
+  background: var(--ds-primary-pressed);
+  transform: scale(0.97);
+  box-shadow: var(--ds-shadow-sm);
+}
+
+.ds-btn-secondary {
+  background: var(--ds-surface);
+  color: var(--ds-text);
+  border: 1px solid var(--ds-border);
+}
+
+.ds-btn-secondary:hover {
+  color: var(--ds-text);
+  transform: translateY(-1px);
+  box-shadow: var(--ds-shadow-sm);
+}
+
+.ds-btn-secondary:active {
+  transform: scale(0.97);
+}
+
+.ds-btn-ghost {
+  background: transparent;
+  color: var(--ds-text);
+}
+
+.ds-btn-ghost:hover {
+  background: var(--ds-surface);
+  color: var(--ds-text);
+}
+
+/* ----- Section labels ----- */
+.grid-label {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-fs-caption);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ds-text-muted);
+  margin: 0 0 var(--ds-space-4);
+}
+
+/* ----- Back link ----- */
+.ds-back-link {
+  font-family: var(--ds-font-body);
+  font-size: 13px;
+  color: var(--ds-text-muted);
+  text-decoration: none;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: var(--ds-space-4);
+}
+
+.ds-back-link:hover {
+  color: var(--ds-link);
+}
+
+/* ----- Page header (eyebrow + h1 + lede) ----- */
+.ds-page-header {
+  padding-top: var(--ds-space-7);
+}
+
+.ds-page-header > .grid-label {
+  margin: 0 0 var(--ds-space-2);
+}
+
+.ds-page-header > h1 {
+  margin: 0 0 var(--ds-space-3);
+}
+
+.ds-page-header > .ds-lede {
+  margin: 0 0 var(--ds-space-6);
+  max-width: 620px;
+}
+
+/* ----- Small mono note (inline meta text) ----- */
+.ds-mono-note {
+  font-family: var(--ds-font-mono);
+  font-size: 12px;
+  color: var(--ds-text-muted);
+}
+
+/* ----- Panel (cards that don't need shadcn's internal structure) ----- */
+.ds-panel {
+  background: var(--ds-surface);
+  border-radius: var(--ds-radius-md);
+  padding: var(--ds-space-5);
+  box-shadow: var(--ds-shadow-sm);
+  transition: transform var(--ds-duration-base) var(--ds-ease-standard),
+              box-shadow var(--ds-duration-base) var(--ds-ease-standard);
+}
+.ds-panel.interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ds-shadow-md);
+}
+
+/* ----- kbd chip ----- */
+.kbd {
+  font-family: var(--ds-font-mono);
+  font-size: 11px;
+  padding: 2px 6px;
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-text);
+}
