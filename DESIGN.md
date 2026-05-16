@@ -1,4 +1,4 @@
-# Design system — @dustinriley/design
+# Design system — @dustin-riley/design
 
 This file is the source of truth for visual / interaction decisions. If you are an agent or contributor about to add UI, **read this file first**, then follow the pointers into the package's CSS for the actual tokens and component styles.
 
@@ -24,9 +24,9 @@ This doc is the source of truth; the bundled `dustinriley-design` skill mirrors 
 
 | Concern | File |
 |---|---|
-| Design tokens (color, type, spacing, radius, shadow, motion) | `@dustinriley/design/tokens.css` |
-| Component / primitive styles (buttons, container, panel, typographic helpers, etc.) | `@dustinriley/design/core.css` |
-| Tailwind v4 base + theme bridge + shadcn bridge | `@dustinriley/design/tailwind.css` |
+| Design tokens (color, type, spacing, radius, shadow, motion) | `@dustin-riley/design/tokens.css` |
+| Component / primitive styles (buttons, container, panel, typographic helpers, etc.) | `@dustin-riley/design/core.css` |
+| Tailwind v4 base + theme bridge + shadcn bridge | `@dustin-riley/design/tailwind.css` |
 
 **All design tokens are CSS custom properties prefixed `--ds-*`.** Always reference the token, never hard-code a hex / px value. If you need something the token set doesn't cover, that's a signal to push back on the design, not invent a one-off value.
 
@@ -174,7 +174,7 @@ For framework motion (Framer Motion etc.), use spring presets:
 
 ## Component anchors
 
-When building or modifying UI, prefer extending these existing patterns over inventing parallel ones. They're all defined in `@dustinriley/design/core.css`:
+When building or modifying UI, prefer extending these existing patterns over inventing parallel ones. They're all defined in `@dustin-riley/design/core.css`:
 
 | Pattern | Class |
 |---|---|

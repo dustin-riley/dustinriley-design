@@ -1,11 +1,11 @@
 ---
 name: dustinriley-design
-description: Use when building or modifying any UI in a project that consumes @dustinriley/design — enforces the warm mid-century-modern token system, the three-radii/three-shadow rules, sentence-case voice, and the curated .ds-* primitive vocabulary.
+description: Use when building or modifying any UI in a project that consumes @dustin-riley/design — enforces the warm mid-century-modern token system, the three-radii/three-shadow rules, sentence-case voice, and the curated .ds-* primitive vocabulary.
 ---
 
 # dustinriley design system
 
-Apply this whenever you add or change UI in a project importing `@dustinriley/design`.
+Apply this whenever you add or change UI in a project importing `@dustin-riley/design`.
 
 ## Non-negotiables
 - One primary (burnt orange `#B8541C`), accents ochre + teal. Never invent colors.
@@ -16,8 +16,8 @@ Apply this whenever you add or change UI in a project importing `@dustinriley/de
 - Never hard-code a hex/px value — reference a `--ds-*` token.
 
 ## How to consume
-- Always: `@import "@dustinriley/design/tokens.css"; @import "@dustinriley/design/core.css";`
-- Tailwind v4 + shadcn projects additionally: `@import "@dustinriley/design/tailwind.css";`
+- Always: `@import "@dustin-riley/design/tokens.css"; @import "@dustin-riley/design/core.css";`
+- Tailwind v4 + shadcn projects additionally: `@import "@dustin-riley/design/tailwind.css";`
 
 ## Vocabulary (prefer extending these over inventing parallels)
 Buttons `.ds-btn` + `.ds-btn-primary|secondary|ghost`; layout `.ds-container`,
@@ -28,4 +28,4 @@ surfaces `.ds-panel`, `.kbd`.
 Site-specific furniture (nav, footer, hero, grids) is NOT in the package by
 design — build it per project from these primitives and tokens.
 
-See the full rationale in `@dustinriley/design/DESIGN.md`.
+See the full rationale in `@dustin-riley/design/DESIGN.md`.

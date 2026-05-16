@@ -1,4 +1,4 @@
-# @dustinriley/design
+# @dustin-riley/design
 
 Warm mid-century-modern design system: tokens, base resets, and a curated set of
 reusable CSS primitives. Framework-neutral, with an optional Tailwind v4 +
@@ -7,18 +7,18 @@ shadcn bridge.
 ## Install
 
 ```bash
-npm i @dustinriley/design
+npm i @dustin-riley/design
 ```
 
 ## Use
 
 ```css
 /* any project */
-@import "@dustinriley/design/tokens.css";
-@import "@dustinriley/design/core.css";
+@import "@dustin-riley/design/tokens.css";
+@import "@dustin-riley/design/core.css";
 
 /* Tailwind v4 + shadcn projects instead just need: */
-@import "@dustinriley/design/tailwind.css"; /* pulls in core + tokens */
+@import "@dustin-riley/design/tailwind.css"; /* pulls in core + tokens */
 ```
 
 ## What's in / out
