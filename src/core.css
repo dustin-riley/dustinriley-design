@@ -154,6 +154,8 @@ h6,
 }
 
 /* ----- Section labels ----- */
+/* Pure typography — no outer margin. Stacked spacing is the context's job
+   (e.g. .ds-page-header > .grid-label below); inline/flex uses stay clean. */
 .grid-label {
   font-family: var(--ds-font-mono);
   font-size: var(--ds-fs-caption);
@@ -161,7 +163,6 @@ h6,
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--ds-text-muted);
-  margin: 0 0 var(--ds-space-4);
 }
 
 /* ----- Back link ----- */
