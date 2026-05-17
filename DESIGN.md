@@ -11,6 +11,7 @@ This doc is the source of truth; the bundled `dustinriley-design` skill mirrors 
 - **One primary** (burnt orange `#B8541C`), **two accents** (ochre, teal). Don't invent colors.
 - **Three radii only**: `8px` (inputs/chips), `16px` (cards/modals), `999px` (buttons/toggles). Nothing else.
 - **Three shadows only**: `sm`, `md`, `lg` — all warm-tinted (`rgba(74, 52, 28, …)`), never gray or black.
+- **One border weight**: `--ds-border-width` (`1px`), never heavier — emphasis is shadow / elevation, not a thicker border.
 - **Sentence case everywhere.** No Title Case. No ALL CAPS for emphasis. Even nav: "experiments", "writing", "about".
 - **First person.** Address the reader as "you". No marketing puffery.
 - **No emoji.** Use Lucide icons or unicode arrows (`→ ↗ ↓ ←`).
@@ -122,6 +123,18 @@ Three values. **No others allowed.**
 | `--ds-radius-pill` | `999px` | Buttons, toggles, segmented controls, tag chips |
 
 Corners are continuous / squircle-adjacent — that's why `16px` and `999px` feel right.
+
+---
+
+## Border
+
+One weight. **No others allowed.**
+
+| Token | Value | Use |
+|---|---|---|
+| `--ds-border-width` | `1px` | Every border — panels, inputs, dividers, hairlines |
+
+Borders are always this single hairline; the system has no heavier border. When something needs more separation or emphasis, use **shadow / elevation** (see Shadow), not a thicker border. Reference `--ds-border-width` for the width and `--ds-border` for the color — never hard-code `1px`.
 
 ---
 

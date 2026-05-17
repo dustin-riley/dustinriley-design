@@ -17,6 +17,7 @@ const REQUIRED_TOKENS = [
   "--ds-success", "--ds-warning", "--ds-error", "--ds-on-primary",
   "--ds-font-display", "--ds-font-body", "--ds-font-mono",
   "--ds-radius-sm", "--ds-radius-md", "--ds-radius-pill",
+  "--ds-border-width",
   "--ds-shadow-sm", "--ds-shadow-md", "--ds-shadow-lg",
   "--ds-ease-standard"
 ];
